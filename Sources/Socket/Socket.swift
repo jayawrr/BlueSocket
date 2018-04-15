@@ -2351,6 +2351,11 @@ public class Socket: SocketReader, SocketWriter {
 			throw Error(code: Socket.SOCKET_ERR_LISTEN_FAILED, reason: self.lastError())
 		}
 		
+		self.signature?.path = path
+		self.signature?.isBound = true
+		self.signature?.isSecure = false
+		self.signature?.address = signature.address
+
 		// We don't actually listen for connections with a UDP socket, so we skip the next steps...
 		if signature.socketType == .datagram {
 			return
@@ -2370,10 +2375,6 @@ public class Socket: SocketReader, SocketWriter {
 		#endif
 
 		self.isListening = true
-		self.signature?.path = path
-		self.signature?.isBound = true
-		self.signature?.isSecure = false
-		self.signature?.address = signature.address
 	}
 
 	// MARK: --- UDP
