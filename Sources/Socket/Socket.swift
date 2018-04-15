@@ -2352,7 +2352,7 @@ public class Socket: SocketReader, SocketWriter {
 		}
 		
 		// We don't actually listen for connections with a UDP socket, so we skip the next steps...
-		if signature.socketType == .datagram && signature.proto == .udp {
+		if signature.socketType == .datagram {
 			return
 		}
 
