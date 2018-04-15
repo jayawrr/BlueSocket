@@ -2310,7 +2310,8 @@ public class Socket: SocketReader, SocketWriter {
 		}
 
 		// Create the signature...
-		let sig = try Signature(socketType: .stream, proto: .unix, path: path)
+//		let sig = try Signature(socketType: .stream, proto: .unix, path: path)
+		let sig = try Signature(socketType: sockSig.socketType, proto: .unix, path: path)
 		guard let signature = sig else {
 
 			throw Error(code:Socket.SOCKET_ERR_BAD_SIGNATURE_PARAMETERS, reason: "Socket contains invalid signature parameters")
