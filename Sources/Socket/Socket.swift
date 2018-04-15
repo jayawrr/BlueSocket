@@ -2350,6 +2350,11 @@ public class Socket: SocketReader, SocketWriter {
 
 			throw Error(code: Socket.SOCKET_ERR_LISTEN_FAILED, reason: self.lastError())
 		}
+		
+		// We don't actually listen for connections with a UDP socket, so we skip the next steps...
+		if signature.socketType == .datagram && signature.proto == .udp {
+			return
+		}
 
 		// Now listen for connections...
 		#if os(Linux)
